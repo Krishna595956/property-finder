@@ -1,0 +1,141 @@
+import React, { useState } from 'react'
+import '../css/Login.css'
+import axios from 'axios'
+
+export default function Sellhouse() {
+    const [data,setData]=useState({
+        year:"",
+        area:"",
+        roomstype:"",
+        address:"",
+        floors:"",
+        parking:'',
+        img1:"",
+        img2:"",
+        cost:""
+
+    })
+    const [result,setResult]=useState('')
+
+    const changeHandler = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value });
+      };
+    
+      const { year,area,roomstype,address,floors,parking,img1,img2,cost } = data;
+    
+
+    // const handleLogin=(e)=>{
+    //     e.preventDefault();
+    //     const loginData= async ()=>{
+    //       const token=localStorage.getItem('guesttoken')
+    //         const response=await axios.post("http://localhost:5000/userlogin",{email,password,token})
+    //         const responseData=response.data;
+    //         if(responseData.response==="0"){
+    //             setResult("User does not exist")
+    //         }
+    //         else if(responseData.response==="1"){
+    //           localStorage.setItem('token',responseData.token)
+    //             navigate('/userdashboard')
+    //         }
+    //         else if(responseData.response==="2"){
+    //             setResult("Invalid credentials")
+    //         }
+    //         else{
+    //             setResult(responseData.response)
+    //         }
+    //     }
+    //     loginData();
+    // }
+    const submitHandler=(e)=>{
+      e.preventDefault()
+      const submitApartment=async ()=>{
+          const response=await axios.post("http://localhost:5000/sellapartment",{ year,area,roomstype,address,floors,parking,img1,img2,cost} )
+          const responseData=response.data;
+          if(responseData['response']==="1"){
+            setResult("Property added successfully")
+      }
+
+    }
+    submitApartment();
+  }
+  return (
+<>
+<div>
+          <div className='logincontainer'>
+    <center><h3 className='display-6'>Apartment Details</h3></center>
+      <form onSubmit={submitHandler}>
+  <div className="mb-3">
+    <label  className="form-label">Year built</label>
+    <input type="number" className="form-control"  value={year} onChange={changeHandler} placeholder='Enter year of built' name='year'/>
+    </div>
+  <div className="mb-3">
+    <label  className="form-label">Area(in sq.ft)</label>
+    <input type="number" className="form-control"  value={area} onChange={changeHandler} placeholder='Enter area of the house' name='area'/>
+  </div>
+  <div className="mb-3">
+    <label  className="form-label">No.of floors</label>
+    <input type="number" className="form-control"  value={floors} name="floors" onChange={changeHandler} placeholder='Enter number of floors' />
+  </div>
+  <label  className="form-label">Type</label>
+  <select className="form-select" aria-label="Default select example" value={roomstype} onChange={changeHandler} name='housetype'>
+  <option selected>Select rooms type</option>
+  <option value="1bhk">1 BHK</option>
+  <option value="2bhk">2 BHK</option>
+  <option value="3bhk">3 BHK</option>
+</select>
+<div style={{marginTop:"10px"}}>
+<label htmlFor="gender" className="form-label">
+          Is parking space available?
+        </label>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="parking"
+            value="Yes"
+            onChange={changeHandler}
+          />
+          <label className="form-check-label" htmlFor="flexRadioDefault1">
+            Yes
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="parking"
+            value="No"
+            onChange={changeHandler}
+          />
+          <label className="form-check-label" htmlFor="flexRadioDefault2">
+            No
+          </label>
+        </div>
+        <div className="mb-3">
+    <label  className="form-label">Images</label>
+    <input type="text" className="form-control"  value={img1} onChange={changeHandler} placeholder='Exterior image' name='img1'/><br/>
+    <input type="text" className="form-control"  value={img2} onChange={changeHandler} placeholder='Interior image' name='img2'/>
+    </div>
+    <div className="mb-3">
+    <label  className="form-label">Cost of property</label>
+    <input type="number" className="form-control"  value={cost} onChange={changeHandler} placeholder='Enter cost you want to sell' name='cost'/>
+    </div>
+</div>
+<div className="form-group" >
+    <label for="exampleFormControlTextarea1">Address</label>
+    <textarea placeholder='Enter apartment address' style={{marginTop:"10px"}} className="form-control" id="exampleFormControlTextarea1" rows="3" name='address' value={address} onChange={changeHandler}></textarea>
+  </div>
+  <center><button type="submit" className="btn btn-outline-danger my-4">Submit Details</button></center>
+</form><br/>
+<div className="container1">
+      <div className="row">
+          <center>
+            <h6>{result}</h6>
+          </center>
+      </div>
+    </div>
+</div>
+    </div>
+</>
+  )
+}
