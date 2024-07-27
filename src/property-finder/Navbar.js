@@ -1,19 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 
 export default function Navbar() {
-  const navigate=useNavigate()
-  const handleLogout=()=>{
-    localStorage.setItem('token',null)
-    navigate('/')
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    const token=localStorage.getItem('token')
+    if(token){
+      localStorage.getItem()
+      setIsLoggedIn(true);
+    }
+    
+  };
+
+  const handleLogout = () => {
+    const token=localStorage.getItem('token')
+    if(token){
+      localStorage.removeItem('token')
+    setIsLoggedIn(false);
+    }
+
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-lg-top">
   <div className="container-fluid">
-    <Link className="navbar-brand" to="#">PropFind</Link>
+    <Link className="navbar-brand" to="/">PropFind</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -26,9 +40,8 @@ export default function Navbar() {
           <Link className="nav-link" to="/buyprop">Buy property</Link>
         </li>
       </ul>
-      {localStorage.getItem('token')===null ? (<><button className="btn btn-danger" onClick={handleLogout}>Logout</button></>) : (<><Link to='/userlogin'><button className="btn btn-danger" type="submit">Login</button></Link></>)}
-
-    </div>
+      <button className='btn btn-danger'  onClick={isLoggedIn ? handleLogout : handleLogin}>{isLoggedIn ? 'Logout' : 'Login'}</button>
+         </div>
   </div>
 </nav>
     </>

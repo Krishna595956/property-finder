@@ -156,6 +156,9 @@ app.post('/sellhouse',async (req,res)=>{
     try{
         const { year,area,housetype,address,img1,img2,cost,token } = req.body;
         const decoded=jwt.verify(token,secret_key)
+        if(decoded.data['useremail']===null){
+            return res.json({"response":"0"})
+        }
         await cluster.connect()
         await properties.insertOne({"year":year,"area":area,"housetype":housetype,"address":address,"img1":img1,"img2":img2,"cost":cost,"category":"house","owner":decoded.data['useremail']})
         await cluster.close()

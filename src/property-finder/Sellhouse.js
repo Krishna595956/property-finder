@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import '../css/Login.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Sellhouse() {
+  const navigate=useNavigate()
     const [data,setData]=useState({
         year:"",
         area:"",
@@ -12,7 +14,6 @@ export default function Sellhouse() {
         img2:"",
         cost:""
     })
-    const [result,setResult]=useState('')
 
     const changeHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -46,16 +47,26 @@ export default function Sellhouse() {
 
     const submitHandler=(e)=>{
       e.preventDefault();
-      const submitHouse=async ()=>{
-        const token=localStorage.getItem('token')
-        const response = await axios.post("http://localhost:5000/sellhouse",{ year,area,housetype,address,img1,img2,cost,token });
-        const responseData = response.data;
-        if(responseData['response']==="1"){
-          setResult("Property added successfully")
+      const token=localStorage.getItem('token')
+        if(!token || token===null){
+          alert("login")
+        navigate('/userlogin')
         }
-      }
-      submitHouse()
+        else{
+          const submitHouse=async ()=>{
+            const token=localStorage.getItem('token')
+          const response = await axios.post("http://localhost:5000/sellhouse",{ year,area,housetype,address,img1,img2,cost,token });
+          const responseData = response.data;
+          if(responseData['response']==="1"){
+            alert("Property added successfully")
+            
+        }
+        }
+        submitHouse()
     }
+    
+  }
+
 
   return (
 <>
@@ -73,13 +84,13 @@ export default function Sellhouse() {
   </div>
   <label  className="form-label">Type</label>
   <select className="form-select" aria-label="Default select example" value={housetype} onChange={changeHandler} name='housetype'>
-  <option selected>Select home type</option>
+  <option value=''>Select home type</option>
   <option value="1bhk">1 BHK</option>
   <option value="2bhk">2 BHK</option>
   <option value="3bhk">3 BHK</option>
 </select>
 <div className="form-group" >
-    <label for="exampleFormControlTextarea1" style={{marginTop:"10px"}}>Address</label>
+    <label htmlFor="exampleFormControlTextarea1" style={{marginTop:"10px"}}>Address</label>
     <textarea className="form-control" placeholder='Enter address' id="exampleFormControlTextarea1" rows="3" name='address' value={address} onChange={changeHandler}></textarea>
   </div>
   <div className="mb-3">
@@ -93,13 +104,7 @@ export default function Sellhouse() {
     </div>
   <center><button type="submit" className="btn btn-outline-danger my-4">Submit Details</button></center>
 </form><br/>
-<div className="container1">
-      <div className="row">
-          <center>
-            <h6>{result}</h6>
-          </center>
-      </div>
-    </div>
+
 </div>
     </div>
 </>

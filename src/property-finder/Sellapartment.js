@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import '../css/Login.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Sellhouse() {
+  const navigate=useNavigate()
     const [data,setData]=useState({
         year:"",
         area:"",
@@ -23,41 +25,26 @@ export default function Sellhouse() {
     
       const { year,area,roomstype,address,floors,parking,img1,img2,cost } = data;
     
-
-    // const handleLogin=(e)=>{
-    //     e.preventDefault();
-    //     const loginData= async ()=>{
-    //       const token=localStorage.getItem('guesttoken')
-    //         const response=await axios.post("http://localhost:5000/userlogin",{email,password,token})
-    //         const responseData=response.data;
-    //         if(responseData.response==="0"){
-    //             setResult("User does not exist")
-    //         }
-    //         else if(responseData.response==="1"){
-    //           localStorage.setItem('token',responseData.token)
-    //             navigate('/userdashboard')
-    //         }
-    //         else if(responseData.response==="2"){
-    //             setResult("Invalid credentials")
-    //         }
-    //         else{
-    //             setResult(responseData.response)
-    //         }
-    //     }
-    //     loginData();
-    // }
     const submitHandler=(e)=>{
       e.preventDefault()
-      const submitApartment=async ()=>{
-        const token=localStorage.getItem('token')
-          const response=await axios.post("http://localhost:5000/sellapartment",{ year,area,roomstype,address,floors,parking,img1,img2,cost,token} )
-          const responseData=response.data;
-          if(responseData['response']==="1"){
-            setResult("Property added successfully")
+      const token=localStorage.getItem('token')
+      if(!token){
+        alert("login")
+      navigate('/userlogin')
+      }
+      else{
+        const submitApartment=async ()=>{
+          const token=localStorage.getItem('token')
+            const response=await axios.post("http://localhost:5000/sellapartment",{ year,area,roomstype,address,floors,parking,img1,img2,cost,token} )
+            const responseData=response.data;
+            if(responseData['response']==="1"){
+              setResult("Property added successfully")
+        }
+  
+      }
+      submitApartment();
       }
 
-    }
-    submitApartment();
   }
   return (
 <>
@@ -78,7 +65,7 @@ export default function Sellhouse() {
     <input required type="number" className="form-control"  value={floors} name="floors" onChange={changeHandler} placeholder='Enter number of floors' />
   </div>
   <label  className="form-label">Type</label>
-  <select className="form-select" aria-label="Default select example" value={roomstype} onChange={changeHandler} name='housetype'>
+  <select className="form-select" aria-label="Default select example" value={roomstype} onChange={changeHandler} name='roomstype'>
   <option selected>Select rooms type</option>
   <option value="1bhk">1 BHK</option>
   <option value="2bhk">2 BHK</option>

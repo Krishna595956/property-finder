@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import '../css/Login.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function Sellhouse() {
+  const navigate=useNavigate();
     const [data,setData]=useState({
         year:"",
         area:"",
@@ -12,7 +14,6 @@ export default function Sellhouse() {
         img2:"",
         cost:""
     })
-    const [result,setResult]=useState('')
 
     const changeHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -46,16 +47,23 @@ export default function Sellhouse() {
 
   const submitHandler=(e)=>{
     e.preventDefault()
+    const token=localStorage.getItem('token')
+    if(!token){
+      alert('login')
+      navigate('/userlogin')
+    }
+    else{
     const submitLand=async ()=>{
       const token=localStorage.getItem('token')
       const response=await axios.post("http://localhost:5000/sellland",{ year,area,landtype,address,img1,img2,cost,token } )
       const responseData=response.data;
       if(responseData['response']==="1"){
-        setResult("Property added successfully")
+        alert("Property added successfully")
       }
   }
   submitLand()
   }
+}
 
   return (
 <>
@@ -94,13 +102,6 @@ export default function Sellhouse() {
     </div>
   <center><button type="submit" className="btn btn-outline-danger my-4">Submit Details</button></center>
 </form><br/>
-<div className="container1">
-      <div className="row">
-          <center>
-            <h6>{result}</h6>
-          </center>
-      </div>
-    </div>
 </div>
     </div>
 </>
