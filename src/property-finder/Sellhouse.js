@@ -65,11 +65,11 @@ export default function Sellhouse() {
       <form onSubmit={submitHandler}>
   <div className="mb-3">
     <label  className="form-label">Year built</label>
-    <input type="number" className="form-control"  value={year} onChange={changeHandler} placeholder='Enter year of built' name='year'/>
+    <input required type="number" className="form-control"  value={year} onChange={changeHandler} placeholder='Enter year of built' name='year'/>
     </div>
   <div className="mb-3">
     <label  className="form-label">Area(in sq.ft)</label>
-    <input type="number" className="form-control"  value={area} onChange={changeHandler} placeholder='Enter area of the house' name='area'/>
+    <input required type="number" className="form-control"  value={area} onChange={changeHandler} placeholder='Enter area of the house' name='area'/>
   </div>
   <label  className="form-label">Type</label>
   <select className="form-select" aria-label="Default select example" value={housetype} onChange={changeHandler} name='housetype'>
@@ -84,12 +84,12 @@ export default function Sellhouse() {
   </div>
   <div className="mb-3">
     <label  className="form-label">Images</label>
-    <input type="text" className="form-control"  value={img1} onChange={changeHandler} placeholder='Exterior image' name='img1'/><br/>
-    <input type="text" className="form-control"  value={img2} onChange={changeHandler} placeholder='Interior image' name='img2'/>
+    <input required type="text" className="form-control"  value={img1} onChange={changeHandler} placeholder='Exterior image' name='img1'/><br/>
+    <input required type="text" className="form-control"  value={img2} onChange={changeHandler} placeholder='Interior image' name='img2'/>
     </div>
     <div className="mb-3">
     <label  className="form-label">Cost of property</label>
-    <input type="number" className="form-control"  value={cost} onChange={changeHandler} placeholder='Enter cost you want to sell' name='cost'/>
+    <input required type="number" className="form-control"  value={cost} onChange={changeHandler} placeholder='Enter cost you want to sell' name='cost'/>
     </div>
   <center><button type="submit" className="btn btn-outline-danger my-4">Submit Details</button></center>
 </form><br/>

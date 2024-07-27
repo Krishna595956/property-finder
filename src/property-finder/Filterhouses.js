@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Filterhouses() {
     const [data1, setData1] = useState([]);
@@ -155,12 +156,14 @@ export default function Filterhouses() {
                             </table>
                             <br />
                             <center>
+                              <Link to='/getownerdetails'>
                               <button
                                 className="btn btn-success"
                                 style={{ margin: "10px" }}
                               >
                                 Get owner details
                               </button>
+                              </Link>
                             </center>
                           </div>
                         </div>

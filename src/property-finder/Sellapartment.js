@@ -49,7 +49,8 @@ export default function Sellhouse() {
     const submitHandler=(e)=>{
       e.preventDefault()
       const submitApartment=async ()=>{
-          const response=await axios.post("http://localhost:5000/sellapartment",{ year,area,roomstype,address,floors,parking,img1,img2,cost} )
+        const token=localStorage.getItem('token')
+          const response=await axios.post("http://localhost:5000/sellapartment",{ year,area,roomstype,address,floors,parking,img1,img2,cost,token} )
           const responseData=response.data;
           if(responseData['response']==="1"){
             setResult("Property added successfully")
@@ -66,15 +67,15 @@ export default function Sellhouse() {
       <form onSubmit={submitHandler}>
   <div className="mb-3">
     <label  className="form-label">Year built</label>
-    <input type="number" className="form-control"  value={year} onChange={changeHandler} placeholder='Enter year of built' name='year'/>
+    <input required type="number" className="form-control"  value={year} onChange={changeHandler} placeholder='Enter year of built' name='year'/>
     </div>
   <div className="mb-3">
     <label  className="form-label">Area(in sq.ft)</label>
-    <input type="number" className="form-control"  value={area} onChange={changeHandler} placeholder='Enter area of the house' name='area'/>
+    <input required type="number" className="form-control"  value={area} onChange={changeHandler} placeholder='Enter area of the house' name='area'/>
   </div>
   <div className="mb-3">
     <label  className="form-label">No.of floors</label>
-    <input type="number" className="form-control"  value={floors} name="floors" onChange={changeHandler} placeholder='Enter number of floors' />
+    <input required type="number" className="form-control"  value={floors} name="floors" onChange={changeHandler} placeholder='Enter number of floors' />
   </div>
   <label  className="form-label">Type</label>
   <select className="form-select" aria-label="Default select example" value={roomstype} onChange={changeHandler} name='housetype'>
@@ -89,6 +90,7 @@ export default function Sellhouse() {
         </label>
         <div className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="parking"
@@ -100,7 +102,7 @@ export default function Sellhouse() {
           </label>
         </div>
         <div className="form-check">
-          <input
+          <input required
             className="form-check-input"
             type="radio"
             name="parking"
@@ -113,12 +115,12 @@ export default function Sellhouse() {
         </div>
         <div className="mb-3">
     <label  className="form-label">Images</label>
-    <input type="text" className="form-control"  value={img1} onChange={changeHandler} placeholder='Exterior image' name='img1'/><br/>
-    <input type="text" className="form-control"  value={img2} onChange={changeHandler} placeholder='Interior image' name='img2'/>
+    <input required type="text" className="form-control"  value={img1} onChange={changeHandler} placeholder='Exterior image' name='img1'/><br/>
+    <input required type="text" className="form-control"  value={img2} onChange={changeHandler} placeholder='Interior image' name='img2'/>
     </div>
     <div className="mb-3">
     <label  className="form-label">Cost of property</label>
-    <input type="number" className="form-control"  value={cost} onChange={changeHandler} placeholder='Enter cost you want to sell' name='cost'/>
+    <input required type="number" className="form-control"  value={cost} onChange={changeHandler} placeholder='Enter cost you want to sell' name='cost'/>
     </div>
 </div>
 <div className="form-group" >

@@ -38,11 +38,11 @@ export default function Login() {
       <form onSubmit={handleLogin}>
   <div className="mb-3">
     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-    <input type="email" className="form-control"  aria-describedby="emailHelp" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter your email'/>
+    <input required type="email" className="form-control"  aria-describedby="emailHelp" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter your email'/>
     </div>
   <div className="mb-3">
     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Enter your password'/>
+    <input required type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Enter your password'/>
   </div>
   <center><button type="submit" className="btn btn-outline-danger">Login</button></center>
 </form><br/>

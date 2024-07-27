@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Navbar() {
+  const navigate=useNavigate()
+  const handleLogout=()=>{
+    localStorage.setItem('token',null)
+    navigate('/')
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-lg-top">
@@ -18,10 +25,9 @@ export default function Navbar() {
         <li className="nav-item">
           <Link className="nav-link" to="/buyprop">Buy property</Link>
         </li>
-
-
       </ul>
-        <Link to='/userlogin'><button className="btn btn-danger" type="submit">Login</button></Link>
+      {localStorage.getItem('token')===null ? (<><button className="btn btn-danger" onClick={handleLogout}>Logout</button></>) : (<><Link to='/userlogin'><button className="btn btn-danger" type="submit">Login</button></Link></>)}
+
     </div>
   </div>
 </nav>

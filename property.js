@@ -155,8 +155,9 @@ app.post('/resetpassword',async (req,res)=>{
 app.post('/sellhouse',async (req,res)=>{
     try{
         const { year,area,housetype,address,img1,img2,cost,token } = req.body;
+        const decoded=jwt.verify(token,secret_key)
         await cluster.connect()
-        await properties.insertOne({"year":year,"area":area,"housetype":housetype,"address":address,"img1":img1,"img2":img2,"cost":cost,"category":"house"})
+        await properties.insertOne({"year":year,"area":area,"housetype":housetype,"address":address,"img1":img1,"img2":img2,"cost":cost,"category":"house","owner":decoded.data['useremail']})
         await cluster.close()
         return res.json({"response":"1"})
         
@@ -167,9 +168,9 @@ app.post('/sellhouse',async (req,res)=>{
 
 app.post('/sellapartment',async (req,res)=>{
     try{
-        const {year,area,roomstype,address,floors,parking,img1,img2,cost}=req.body;
+        const {year,area,roomstype,address,floors,parking,img1,img2,cost,token}=req.body;
     await cluster.connect()
-    await properties.insertOne({"year":year,"area":area,"roomstype":roomstype,"address":address,"floors":floors,"parking":parking,"img1":img1,"img2":img2,"cost":cost,"category":"apartment"})
+    await properties.insertOne({"year":year,"area":area,"roomstype":roomstype,"address":address,"floors":floors,"parking":parking,"img1":img1,"img2":img2,"cost":cost,"category":"apartment","owner":decoded.data['useremail']})
     return res.json({"response":"1"})
     }
     catch(err){
@@ -179,8 +180,9 @@ app.post('/sellapartment',async (req,res)=>{
 
 app.post('/sellland',async (req,res)=>{
     try{
-        const {year,area,landtype,address,img1,img2,cost}=req.body;
-        await properties.insertOne({"shape":year,"area":area,"landtype":landtype,"address":address,"img1":img1,"img2":img2,"cost":cost,"category":"land"})
+        const {year,area,landtype,address,img1,img2,cost,token}=req.body;
+        const decoded=jwt.verify(token,secret_key)
+        await properties.insertOne({"shape":year,"area":area,"landtype":landtype,"address":address,"img1":img1,"img2":img2,"cost":cost,"category":"land","owner":decoded.data['useremail']})
         return res.json({"response":"1"})
     }
     catch(err){
@@ -222,6 +224,20 @@ app.get('/getlands',async (req,res)=>{
     }
  }
  )
+
+ app.post('/getownerdetails',async (req,res)=>{
+    try{
+        const {token}=req.body;
+    const decoded=jwt.verify(token,secret_key)
+    await cluster.connect()
+    const owner=await users.findOne({"email":decoded.data['useremail']})
+    console.log(owner)
+    return res.json({"response":"1","owner":owner})
+    } 
+    catch(err){
+        return res.json({"response":err})
+    }
+ })
 
 app.listen(5000,()=>{
     console.log("Server started running.........")

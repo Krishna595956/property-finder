@@ -56,7 +56,7 @@ export default function Guestregister() {
       <form onSubmit={submitHandler} method="post">
         <div className="mb-3">
           <label className="form-label">Name:</label>
-          <input
+          <input required
             type="text"
             className="form-control"
             name="name"
@@ -67,7 +67,7 @@ export default function Guestregister() {
         </div>
         <div className="mb-3">
           <label className="form-label">Mobile:</label>
-          <input
+          <input required
             type="number"
             className="form-control"
             value={mobile}
@@ -78,7 +78,7 @@ export default function Guestregister() {
         </div>
         <div className="mb-3">
           <label className="form-label">Email address</label>
-          <input
+          <input required
             type="email"
             className="form-control"
             aria-describedby="emailHelp"
@@ -92,7 +92,7 @@ export default function Guestregister() {
           Gender:
         </label>
         <div className="form-check">
-          <input
+          <input required
             className="form-check-input"
             type="radio"
             name="gender"
@@ -104,7 +104,7 @@ export default function Guestregister() {
           </label>
         </div>
         <div className="form-check">
-          <input
+          <input required
             className="form-check-input"
             type="radio"
             name="gender"
@@ -119,7 +119,7 @@ export default function Guestregister() {
           <label  className="form-label">
             Password
           </label>
-          <input
+          <input required
             type="password"
             className="form-control"
             value={password}
@@ -132,7 +132,7 @@ export default function Guestregister() {
           <label  className="form-label">
             Re-enter Password
           </label>
-          <input
+          <input required
             type="password"
             className="form-control"
             value={rpassword}
@@ -145,7 +145,7 @@ export default function Guestregister() {
           <label  className="form-label">
             Date of birth:
           </label>
-          <input
+          <input required
             type="date"
             className="form-control"
             value={dob}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Filterapartment() {
   const [data, setData] = useState([]);
@@ -154,12 +155,14 @@ export default function Filterapartment() {
                           </table>
                           <br />
                           <center>
-                            <button
+                           <Link to='/getownerdetails'>
+                           <button
                               className="btn btn-success"
                               style={{ margin: "10px" }}
                             >
                               Get owner details
                             </button>
+                           </Link>
                           </center>
                         </div>
                       </div>
