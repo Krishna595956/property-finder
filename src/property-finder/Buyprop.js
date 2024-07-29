@@ -64,7 +64,7 @@ export default function Buyprop() {
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             >
-              <option selected value="">
+              <option  value="">
                 Select
               </option>
               <option value="apartments">Apartments</option>

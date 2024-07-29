@@ -1,12 +1,18 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Owner() {
+    const nav=useNavigate()
     const [data,setData]=useState('')
     useEffect(()=>{
-        const token=localStorage.getItem('token')
-        axios.post('http://localhost:5000/getownerdetails',{token}).then((resp)=>setData(resp.data.owner)).catch((err)=>console.log(err))
-    },[])
+    const token=localStorage.getItem('token')
+    if(!token){
+        alert('Please login to view owner details')
+        nav('/userlogin')
+    }else{
+    axios.post('http://localhost:5000/getownerdetails',{token}).then((resp)=>setData(resp.data.owner)).catch((err)=>console.log(err))
+}})
   return (
     <>
     <div className='container my-5'>

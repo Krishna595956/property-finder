@@ -20,36 +20,12 @@ export default function Sellhouse() {
       };
     
       const { year,area,landtype,address,img1,img2,cost } = data;
-    
-
-    // const handleLogin=(e)=>{
-    //     e.preventDefault();
-    //     const loginData= async ()=>{
-    //       const token=localStorage.getItem('guesttoken')
-    //         const response=await axios.post("http://localhost:5000/userlogin",{email,password,token})
-    //         const responseData=response.data;
-    //         if(responseData.response==="0"){
-    //             setResult("User does not exist")
-    //         }
-    //         else if(responseData.response==="1"){
-    //           localStorage.setItem('token',responseData.token)
-    //             navigate('/userdashboard')
-    //         }
-    //         else if(responseData.response==="2"){
-    //             setResult("Invalid credentials")
-    //         }
-    //         else{
-    //             setResult(responseData.response)
-    //         }
-    //     }
-    //     loginData();
-    // }
 
   const submitHandler=(e)=>{
     e.preventDefault()
     const token=localStorage.getItem('token')
     if(!token){
-      alert('login')
+      alert('Please login before submitting details')
       navigate('/userlogin')
     }
     else{

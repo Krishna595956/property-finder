@@ -15,6 +15,7 @@ import Filterhouses from './property-finder/Filterhouses'
 import Owner from './property-finder/Owner'
 import Navbar from './property-finder/Navbar'
 import Reset from './property-finder/Reset'
+import Home from './property-finder/Home'
 
 export default function App() {
   const [login,setLogin]=useState(false)
@@ -32,7 +33,7 @@ export default function App() {
      <BrowserRouter>
      <Navbar login={login} setLogin={setLogin}/>
      <Routes>
-      <Route path='/' element={<Buyprop/>}></Route>
+      <Route path='/' element={<Home/>}></Route>
       <Route path='/userlogin' element={<Login  login={login} setLogin={setLogin}/>}></Route>
       <Route path='/userregister' element={<Register  login={login} setLogin={setLogin}/>}></Route>
       <Route path='/email' element={<Email/>}></Route>

@@ -17,7 +17,6 @@ export default function Sellhouse() {
         cost:""
 
     })
-    const [result,setResult]=useState('')
 
     const changeHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -29,7 +28,7 @@ export default function Sellhouse() {
       e.preventDefault()
       const token=localStorage.getItem('token')
       if(!token){
-        alert("login")
+        alert("Please login before submitting details")
       navigate('/userlogin')
       }
       else{
@@ -38,7 +37,7 @@ export default function Sellhouse() {
             const response=await axios.post("http://localhost:5000/sellapartment",{ year,area,roomstype,address,floors,parking,img1,img2,cost,token} )
             const responseData=response.data;
             if(responseData['response']==="1"){
-              setResult("Property added successfully")
+              alert("Property added successfully")
         }
   
       }
@@ -116,13 +115,7 @@ export default function Sellhouse() {
   </div>
   <center><button type="submit" className="btn btn-outline-danger my-4">Submit Details</button></center>
 </form><br/>
-<div className="container1">
-      <div className="row">
-          <center>
-            <h6>{result}</h6>
-          </center>
-      </div>
-    </div>
+
 </div>
     </div>
 </>
