@@ -174,7 +174,7 @@ export default function Filterhouses() {
               </div>
             </>
           ) : (
-            console.log("hii")
+            <center><h1>Loading...........</h1></center>
           )}
         </div> 
       </>

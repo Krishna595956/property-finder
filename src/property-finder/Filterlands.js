@@ -41,14 +41,14 @@ export default function Filterlands() {
           }}
         >
           <form onSubmit={submitFilter} style={{ display: "flex" }}>
-            <div class="input-group">
+            <div className="input-group">
               <select
-                class="custom-select"
+                className="custom-select"
                 id="inputGroupSelect04"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
               >
-                <option selected value="">
+                <option value="">
                   Select
                 </option>
                 <option value="apartments">Apartments</option>
@@ -56,8 +56,8 @@ export default function Filterlands() {
                 <option value="houses">Houses</option>
               </select>
             </div>
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary" type="submit">
+            <div className="input-group-append">
+              <button className="btn btn-outline-primary" type="submit">
                 Filter
               </button>
             </div>
@@ -137,21 +137,21 @@ export default function Filterlands() {
                               </tr>
                               <tr>
                                 <td>
-                                  <strong>Rooms type</strong>
+                                  <strong>Address</strong>
                                 </td>
-                                <td>{item.roomstype}</td>
+                                <td>{item.address}</td>
                               </tr>
                               <tr>
                                 <td>
-                                  <strong>Floors</strong>
+                                  <strong>Land type</strong>
                                 </td>
-                                <td>{item.floors}</td>
+                                <td>{item.landtype}</td>
                               </tr>
                               <tr>
                                 <td>
-                                  <strong>Parking</strong>
+                                  <strong>Cost</strong>
                                 </td>
-                                <td>{item.parking}</td>
+                                <td>{item.cost}</td>
                               </tr>
                             </table>
                             <br />
@@ -174,7 +174,7 @@ export default function Filterlands() {
               </div>
             </>
           ) : (
-            console.log("hii")
+            <center><h1>Loading...........</h1></center>
           )}
         </div> 
       </>

@@ -1,28 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+export default function Navbar(props) {
+const navigate=useNavigate()
   const handleLogin = () => {
     const token=localStorage.getItem('token')
-    if(token){
-      localStorage.getItem()
-      setIsLoggedIn(true);
+    if(!token){
+      navigate('/userlogin')
     }
-    
-  };
-
-  const handleLogout = () => {
-    const token=localStorage.getItem('token')
-    if(token){
+    else{
+      props.setLogin(false)
       localStorage.removeItem('token')
-    setIsLoggedIn(false);
+      navigate('/userlogin')
     }
-
   };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-lg-top">
@@ -37,10 +31,10 @@ export default function Navbar() {
           <Link className="nav-link active" aria-current="page" to="/confirm">Sell property</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/buyprop">Buy property</Link>
+          <Link className="nav-link active" to="/buyprop">Buy property</Link>
         </li>
       </ul>
-      <button className='btn btn-danger'  onClick={isLoggedIn ? handleLogout : handleLogin}>{isLoggedIn ? 'Logout' : 'Login'}</button>
+      <button className='btn btn-danger' onClick={handleLogin}>{props.login?<>Logout</>:<>Login</>}</button>
          </div>
   </div>
 </nav>

@@ -173,7 +173,7 @@ export default function Filterapartment() {
             </div>
           </>
         ) : (
-          console.log("hii")
+          <center><h1>Loading...........</h1></center>
         )}
       </div> 
     </>

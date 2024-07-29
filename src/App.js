@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Login from './property-finder/Ulogin'
 import Register from './property-finder/Userregister'
@@ -14,16 +14,27 @@ import Filterlands from './property-finder/Filterlands'
 import Filterhouses from './property-finder/Filterhouses'
 import Owner from './property-finder/Owner'
 import Navbar from './property-finder/Navbar'
+import Reset from './property-finder/Reset'
 
 export default function App() {
+  const [login,setLogin]=useState(false)
+  useEffect(()=>{
+    const token=localStorage.getItem('token')
+    if(token){
+      setLogin(true)
+    }
+    else{
+      setLogin(false)
+    }
+  },[login])
   return (
     <>
      <BrowserRouter>
-     <Navbar/>
+     <Navbar login={login} setLogin={setLogin}/>
      <Routes>
       <Route path='/' element={<Buyprop/>}></Route>
-      <Route path='/userlogin' element={<Login/>}></Route>
-      <Route path='/userregister' element={<Register/>}></Route>
+      <Route path='/userlogin' element={<Login  login={login} setLogin={setLogin}/>}></Route>
+      <Route path='/userregister' element={<Register  login={login} setLogin={setLogin}/>}></Route>
       <Route path='/email' element={<Email/>}></Route>
       <Route path='/userdashboard' element={<Buyprop/>}></Route>
       <Route path='/otp' element={<Otp/>}></Route>
@@ -36,6 +47,7 @@ export default function App() {
       <Route path='/filterlands' element={<Filterlands/>}></Route>
       <Route path='/filterhouses' element={<Filterhouses/>}></Route>
       <Route path='/getownerdetails' element={<Owner/>}></Route>
+      <Route path='/forgot' element={<Reset/>}></Route>
      </Routes>
      </BrowserRouter> 
     </>

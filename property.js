@@ -18,13 +18,13 @@ const app=express();
 app.use(cors())
 app.use(express.json())
 
-// const client=nodemailer.createTransport({
-//     service:"gmail",
-//     auth:{
-//         user: 'kr4785543@gmail.com', // Replace with your actual email address
-//         pass: '', 
-//     }
-// })
+const client=nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user: 'kr4785543@gmail.com', // Replace with your actual email address
+        pass: 'lbrb ercs mxjq oevr', 
+    }
+})
 
 const generateOTP=()=>{
     const otp=otpgenerator.generate(6,{upperCaseAlphabets: false, specialChars: false,lowerCaseAlphabets:false})

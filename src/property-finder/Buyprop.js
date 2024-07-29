@@ -190,7 +190,7 @@ export default function Buyprop() {
             </div>
           </>
         ) : (
-          console.log("hii")
+          <center><h1>Loading...........</h1></center>
         )}
       </div>
       <div>
@@ -303,12 +303,7 @@ export default function Buyprop() {
             </div>
           </>
         ) : (
-          <div>
-            <center>
-              <h2>Houses</h2>
-            </center>
-            <p>No data</p>
-          </div>
+          console.log("Hello")
         )}
       </div>
       <div>
